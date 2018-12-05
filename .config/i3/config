@@ -1,1 +1,217 @@
-/home/ochesto/.config/i3/config
+# vim: filetype=i3config
+for_window [class="^.*"] border pixel 2
+gaps inner 10
+gaps outer 10
+
+bindsym $mod+g gaps inner current set 10, gaps outer current set 10
+bindsym $mod+Shift+g gaps inner current set 0, gaps outer current set 0
+
+bindsym $mod+s gaps inner current plus 3
+bindsym $mod+Shift+s gaps inner current minus 3
+
+#-------- Color variables --------#
+#    Color Palette: susyblues
+set $bg_color               #0e2f44
+set $active_bg_color        #b1bbc3
+set $inactive_bg_color      #0e2f44
+set $active_text_color      #fffcfc
+set $inactive_text_color    #6e777d
+set $urgent_bg_color        #ff4040
+set $indicator_color        #5e666c
+set $separator_color        #6e777d
+
+#-------- MOD KEY --------#
+set $mod Mod4
+
+#-------- FONT --------#
+font pango:DejaVu Sans Mono 9
+
+#-------- i3 KEYBINDINGS --------#
+# Start a terminal
+bindsym $mod+Return exec sakura
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start dmenu
+bindsym $mod+d exec dmenu_run
+
+# Change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split in horizontal orientation
+bindsym $mod+h split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# Change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+#-------- WORKSPACES --------#
+# Workspaces variables
+set $w1 "1: "
+set $w2 "2: "
+set $w3 "3: "
+set $w4 "4: "
+set $w5 "5: "
+set $w6 "6: "
+set $w7 "7: "
+set $w8 "8: "
+set $w9 "9: "
+set $w10 "10: "
+
+# Switch to workspace
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
+bindsym $mod+4 workspace $w4
+bindsym $mod+5 workspace $w5
+bindsym $mod+6 workspace $w6
+bindsym $mod+7 workspace $w7
+bindsym $mod+8 workspace $w8
+bindsym $mod+9 workspace $w9
+bindsym $mod+0 workspace $w10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3
+bindsym $mod+Shift+4 move container to workspace $w4
+bindsym $mod+Shift+5 move container to workspace $w5
+bindsym $mod+Shift+6 move container to workspace $w6
+bindsym $mod+Shift+7 move container to workspace $w7
+bindsym $mod+Shift+8 move container to workspace $w8
+bindsym $mod+Shift+9 move container to workspace $w9
+bindsym $mod+Shift+0 move container to workspace $w10
+
+#-------- WINDOWS --------#
+# Window colors         border              background          text                    indicator
+client.focused          $active_bg_color    $active_bg_color    $active_text_color      $indicator_color
+client.unfocused        $inactive_bg_color  $inactive_bg_color  $inactive_text_color    $indicator_color
+client.focused_inactive $inactive_bg_color  $inactive_bg_color  $inactive_text_color    $indicator_color
+client.urgent           $urgent_bg_color    $urgent_bg_color    $active_text_color      $indicator_color
+
+# Hide borders in all windows
+hide_edge_borders both
+
+# Resize mode keybinding
+bindsym $mod+r mode "resize"
+
+# Resize window (you can also use the mouse for that)
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+
+    # Same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # Back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+#-------- WINDOWS CONTROLS -------#
+# Floating enabled
+for_window [class="Shutter"] floating enable, border normal
+
+# Assign workspaces
+assign [class="Chromium-browser"] $w2
+for_window [class="Spotify"] move to workspace $w10
+assign [class="TelegramDesktop"] $w9
+assign [class="Code"] $w3
+for_window [window_role="GtkFileChooserDialog"] resize set 640 480, move absolute position center
+
+#-------- STATUS BAR --------#
+bar {
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    position top
+    colors {
+        background $bg_color
+        separator $separator_color
+        #                  border               background          text
+        focused_workspace  $bg_color            $bg_color           $active_text_color
+        inactive_workspace $bg_color            $bg_color           $inactive_text_color
+        urgent_workspace   $urgent_bg_color     $urgent_bg_color    $active_text_color
+    }
+}
+
+#-------- ENVIRONMENT --------#
+
+# Set touchpad configuration
+exec_always --no-startup-id xinput set-prop 15 316 1, 1		    # V and H scrolling
+exec_always --no-startup-id xinput set-prop 15 314 -111, -111	# Natural Scrolling ON
+exec_always --no-startup-id xinput set-prop 15 315 0, 0, 0 	    # Edge Scrolling OFF
+
+# Media keybindings
+bindsym XF86AudioPlay exec playerctl play-pause # Play song
+bindsym XF86AudioNext exec playerctl next       # Next song
+bindsym XF86AudioPrev exec playerctl previous   # Previous song
+bindsym XF86AudioStop exec playerctl stop       # Stop song
+
+# Keyboard functions
+bindsym XF86AudioRaiseVolume exec ponymix increase 5; exec pkill -SIGRTMIN+10 i3blocks      # Increase sound volume
+bindsym XF86AudioLowerVolume exec ponymix decrease 5; exec pkill -SIGRTMIN+10 i3blocks      # Decrease sound volume
+bindsym XF86AudioMute exec ponymix toggle; exec pkill -SIGRTMIN+10 i3blocks                 # Mute sound
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.scripts/brightness.sh +5                # Increase backlight brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness.sh -5              # Decrease backlight brightness
+bindsym XF86WLAN exec sakura -e wicd-curses                                                 # Wi-Fi
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks                                # Caps lock
+bindsym --release Num_Lock exec pkill -SIGRTMIN+11 i3blocks                                 # Num lock
+bindsym $mod+space exec pkill -SIGRTMIN+9 i3blocks                                          # Change keyboard layout
+
+# Startup configuration
+exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpapers/mandelbrot.png     # Set wallpaper
+exec_always setxkbmap us                                                         # Keyboard layout 
+exec --no-startup-id compton --xrender-sync-fence -f -D 3 --config ~/.config/compton.conf                                                        # Start compositor
+exec --no-startup-id xrandr --output DisplayPort-0 --off --output eDP --mode 1366x768 --pos 0x0 --rotate normal --output HDMI-0 --off
+exec --no-startup-id synapse -s                                                     # Start synapse
