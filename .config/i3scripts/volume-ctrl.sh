@@ -1,0 +1,1 @@
+/home/ochesto/.config/i3/scripts/volume-ctrl.sh
