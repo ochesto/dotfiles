@@ -34,3 +34,5 @@ alias ccat="highlight --out-format=ansi" # Color cat - print file with syntax hi
 
 # Useful alias
 alias la='ls -a'
+alias i3config='vim ~/.config/i3/config'
+alias c='cd'
