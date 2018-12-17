@@ -31,7 +31,8 @@ bindsym $mod+Shift+s gaps inner current minus 3
 
 #-------- i3 KEYBINDINGS --------#
 # Start a terminal
-bindsym $mod+Return exec sakura
+bindsym $mod+Return exec termite
+bindsym $mod+Shift+Return exec sakura
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -131,8 +132,7 @@ bindsym $mod+Shift+0 move container to workspace $w10
 bindsym $mod+Ctrl+Left workspace prev_on_output
 bindsym $mod+Ctrl+Right workspace next_on_output
 
-bindsym $mod+Ctrl+Down workspace back_and_forth
-bindsym $mod+Ctrl+Up workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
 
 #-------- WINDOWS --------#
 # Window colors         border              background          text                    indicator
@@ -225,12 +225,18 @@ bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks                    
 bindsym --release Num_Lock exec pkill -SIGRTMIN+11 i3blocks                                 # Num lock
 
 # Switch keyboard layout
-bindsym $mod+space exec (setxkbmap -query | grep -q 'layout:\s\+us') && setxkbmap latam || setxkbmap us; exec pkill -SIGRTMIN+9 i3blocks   
+bindsym $mod+space exec (setxkbmap -query | grep -q 'layout:\s\+us') && setxkbmap latam -option caps:escape || setxkbmap us -option caps:escape; exec pkill -SIGRTMIN+9 i3blocks   
 
 # Keyboard shortcuts
 bindsym Print exec shutter
 
+# Disable CAPS_LOCK
+bindsym $mod+Shift+a exec xmodmap ~/.xmodmaprc
+
+# Turn ON NUM_LOCK
+exec_always numlockx on
+
 # Startup configuration
 exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpapers/mandelbrot.png             # Set wallpaper
-exec_always setxkbmap us                                                                    # Keyboard layout 
-exec --no-startup-id compton --xrender-sync-fence -f -D 3 --config ~/.config/compton.conf   # Start compositorR
+exec_always setxkbmap us -option caps:escape                                                                    # Keyboard layout 
+exec --no-startup-id compton --xrender-sync-fence -f -D 3 --config ~/.config/compton.conf   # Start compositor
