@@ -31,15 +31,21 @@ bindsym $mod+Shift+s gaps inner current minus 3
 
 #-------- i3 KEYBINDINGS --------#
 # Start a terminal
-bindsym $mod+Return exec termite
-bindsym $mod+Shift+Return exec sakura
+bindsym $mod+Return exec $P_TERMINAL
+bindsym $mod+Shift+Return exec $S_TERMINAL
 
 # Kill focused window
 bindsym $mod+Shift+q kill
 
 # Start rofi
-bindsym $mod+d exec rofi -show drun -lines 3 -eh 2
-bindsym Control+Mod1+space exec rofi -show drun -lines 3 -eh 2
+bindsym $mod+d exec dmenu_run -b
+bindsym Control+Mod1+space exec dmenu_run -b
+
+# Deactivate focus wrapping
+focus_wrapping no
+
+# Acivate back-and-forth switching
+workspace_auto_back_and_forth yes
 
 # Change focus
 bindsym $mod+j focus left
@@ -60,10 +66,10 @@ bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
 # Alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left move left 30
+bindsym $mod+Shift+Down move down 30
+bindsym $mod+Shift+Up move up 30
+bindsym $mod+Shift+Right move right 30
 
 # Split in horizontal orientation
 bindsym $mod+h split h
@@ -144,32 +150,11 @@ client.urgent           $urgent_bg_color    $urgent_bg_color    $active_text_col
 # Hide edge borders in windows without gaps
 hide_edge_borders both
 
-# Resize mode keybinding
-bindsym $mod+r mode "resize"
-
-# Resize window (you can also use the mouse for that)
-mode "resize" {
-    # These bindings trigger as soon as you enter the resize mode
-
-    # Pressing left will shrink the window’s width.
-    # Pressing right will grow the window’s width.
-    # Pressing up will shrink the window’s height.
-    # Pressing down will grow the window’s height.
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
-
-    # Same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-
-    # Back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+# Resize windows keybindings
+bindsym $mod+Mod1+Left resize shrink width 10 px or 2 ppt
+bindsym $mod+Mod1+Down resize grow height 10 px or 2 ppt
+bindsym $mod+Mod1+Up resize shrink height 10 px or 2 ppt
+bindsym $mod+Mod1+Right resize grow width 10 px or 2 ppt
 
 #-------- WINDOWS SETTINGS -------#
 # Floating enabled
@@ -220,7 +205,7 @@ bindsym XF86AudioLowerVolume exec ponymix decrease 5; exec pkill -SIGRTMIN+10 i3
 bindsym XF86AudioMute exec ponymix toggle; exec pkill -SIGRTMIN+10 i3blocks                 # Mute sound
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.scripts/brightness.sh +5                # Increase backlight brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness.sh -5              # Decrease backlight brightness
-bindsym XF86WLAN exec sakura -e wicd-curses                                                 # Wi-Fi
+bindsym XF86WLAN exec $P_TERMINAL -e wicd-curses                                                 # Wi-Fi
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks                                # Caps lock
 bindsym --release Num_Lock exec pkill -SIGRTMIN+11 i3blocks                                 # Num lock
 

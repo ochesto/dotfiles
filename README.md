@@ -10,4 +10,6 @@
 * wicd
 * pulsemixer
 * yad
+* vim
+* Thunar
 
