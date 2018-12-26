@@ -26,3 +26,6 @@ export S_TERMINAL="sakura"
 export EDITOR="vim"
 
 
+# Enable touchscreen in firefox
+export MOZ_USE_XINPUT2=1
+

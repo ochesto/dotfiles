@@ -14,6 +14,9 @@ set $separator_color        #6e777d
 #-------- MOD KEY --------#
 set $mod Mod4
 
+#-------- LOCKER --------#
+set $locker "i3lock -i ~/Pictures/wallpapers/mandelbrot.png"
+
 #-------- FONT --------#
 #font pango:DejaVu Sans Mono 9
 font pango:Meslo LG 9
@@ -30,22 +33,31 @@ bindsym $mod+s gaps inner current plus 3
 bindsym $mod+Shift+s gaps inner current minus 3
 
 #-------- i3 KEYBINDINGS --------#
-# Start a terminal
+# Open terminal
 bindsym $mod+Return exec $P_TERMINAL
 bindsym $mod+Shift+Return exec $S_TERMINAL
+
+# Open browser
+bindsym $mod+w exec firefox
+
+# Open NNN
+bindsym $mod+n exec setsid $P_TERMINAL -e nnn
+
+# Window for basic arithmetic
+#bindsym $mod+c [instance="math"] scratchpad show; [instance="math"] move position center
 
 # Kill focused window
 bindsym $mod+Shift+q kill
 
-# Start rofi
-bindsym $mod+d exec dmenu_run -b
-bindsym Control+Mod1+space exec dmenu_run -b
+#dmenu
+set $dmenu "dmenu_run -b -i -nb '$bg_color'"
+bindsym $mod+d exec dmenu_run -i -nb '$bg_color' -nf '$active_text_color'
 
 # Deactivate focus wrapping
 focus_wrapping no
 
 # Acivate back-and-forth switching
-workspace_auto_back_and_forth yes
+#workspace_auto_back_and_forth yes
 
 # Change focus
 bindsym $mod+j focus left
@@ -100,7 +112,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #-------- WORKSPACES --------#
 # Workspaces variables
 set $w1 "1: "
-set $w2 "2: "
+set $w2 "2: "
 set $w3 "3: "
 set $w4 "4: "
 set $w5 "5: "
@@ -162,7 +174,7 @@ for_window [class="Yad"] floating enable
 for_window [class="Shutter"] floating enable, border normal
 
 # Assign workspaces
-assign [class="Chromium-browser"] $w2
+assign [class="Firefox"] $w2
 for_window [class="Spotify"] move to workspace $w10
 assign [class="TelegramDesktop"] $w9
 assign [class="Code"] $w3
@@ -170,6 +182,13 @@ assign [class= "VirtualBox Manager"] $w4
 
 # Settings
 for_window [window_role="GtkFileChooserDialog"] resize set 640 480, move absolute position center
+
+# Window for basic arithmetic
+#for_window [instance="math"] floating enable
+#for_window [instance="math"] resize set 625 400
+#for_window [instance="math"] move scratchpad
+#for_window [instance="math"] border pixel 5
+#exec --no-startup-id $P_TERMINAL --name=math --class=math --title=math -e python -Q new
 
 #-------- STATUS BAR --------#
 bar {
@@ -212,16 +231,21 @@ bindsym --release Num_Lock exec pkill -SIGRTMIN+11 i3blocks                     
 # Switch keyboard layout
 bindsym $mod+space exec (setxkbmap -query | grep -q 'layout:\s\+us') && setxkbmap latam -option caps:escape || setxkbmap us -option caps:escape; exec pkill -SIGRTMIN+9 i3blocks   
 
-# Keyboard shortcuts
+# Make a screenshot with Shutter
 bindsym Print exec shutter
 
-# Disable CAPS_LOCK
-bindsym $mod+Shift+a exec xmodmap ~/.xmodmaprc
-
-# Turn ON NUM_LOCK
+# Turn ON NUM_LOCK at startup
 exec_always numlockx on
 
 # Startup configuration
 exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpapers/mandelbrot.png             # Set wallpaper
 exec_always setxkbmap us -option caps:escape                                                                    # Keyboard layout 
 exec --no-startup-id compton --xrender-sync-fence -f -D 3 --config ~/.config/compton.conf   # Start compositor
+
+exec ~/.config/i3scripts/lockscreen.sh
+bindsym $mod+Shift+x exec $locker
+
+# Screensaver timeout
+exec xset s 3600 3600
+exec xset dpms 3600 3600 3600
+
