@@ -16,7 +16,7 @@ ln .vimrc ~/.vimrc
 ln .config/compton.conf ~/.config/compton.conf
 ln .config/i3blocks.conf ~/.config/i3blocks.conf
 
-ln .config/gtk.css ~/.config/gtk-3.0/gtk.css
+ln .config/gtk-3.0/gtk.css ~/.config/gtk-3.0/gtk.css
 
 ln .config/i3/config ~/.config/i3/config
 
