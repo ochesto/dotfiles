@@ -15,7 +15,7 @@ set $separator_color        #6e777d
 set $mod Mod4
 
 #-------- LOCKER --------#
-set $locker "i3lock -i ~/Pictures/wallpapers/mandelbrot.png"
+set $locker "i3lock -i ~/.config/wallpaper.png"
 
 #-------- FONT --------#
 #font pango:DejaVu Sans Mono 9
@@ -238,7 +238,7 @@ bindsym Print exec shutter
 exec_always numlockx on
 
 # Startup configuration
-exec_always --no-startup-id feh --bg-scale ~/Pictures/wallpapers/mandelbrot.png             # Set wallpaper
+exec_always --no-startup-id feh --bg-scale ~/.config/wallpaper.png             # Set wallpaper
 exec_always setxkbmap us -option caps:escape                                                                    # Keyboard layout 
 exec --no-startup-id compton --xrender-sync-fence -f -D 3 --config ~/.config/compton.conf   # Start compositor
 
