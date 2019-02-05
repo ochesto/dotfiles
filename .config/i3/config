@@ -24,9 +24,9 @@ font pango:Meslo LG 9
 #-------- i3-gaps --------#
 for_window [class="^.*"] border pixel 2
 gaps inner 10
-gaps outer 10
+gaps outer 0
 
-bindsym $mod+g gaps inner current set 10, gaps outer current set 10
+bindsym $mod+g gaps inner current set 10, gaps outer current set 0
 bindsym $mod+Shift+g gaps inner current set 0, gaps outer current set 0
 
 bindsym $mod+s gaps inner current plus 3
@@ -118,7 +118,7 @@ set $w4 "4: "
 set $w5 "5: "
 set $w6 "6: "
 set $w7 "7: "
-set $w8 "8: "
+set $w8 "8: "
 set $w9 "9: "
 set $w10 "10: "
 
@@ -179,6 +179,8 @@ for_window [class="Spotify"] move to workspace $w10
 assign [class="TelegramDesktop"] $w9
 assign [class="Code"] $w3
 assign [class= "VirtualBox Manager"] $w4
+assign [class="Transmission-gtk"] $w8
+assign [class="Quartus"] $w4
 
 # Settings
 for_window [window_role="GtkFileChooserDialog"] resize set 640 480, move absolute position center
@@ -193,7 +195,11 @@ for_window [window_role="GtkFileChooserDialog"] resize set 640 480, move absolut
 #-------- STATUS BAR --------#
 bar {
     status_command i3blocks -c ~/.config/i3blocks.conf
+    
     position top
+    #mode hide
+    #modifier Mod1
+
     colors {
         background $bg_color
         separator $separator_color

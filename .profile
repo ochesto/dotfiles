@@ -29,3 +29,5 @@ export EDITOR="vim"
 # Enable touchscreen in firefox
 export MOZ_USE_XINPUT2=1
 
+
+export QSYS_ROOTDIR="/home/ochesto/Apps/intelFPGA_lite/18.1/quartus/sopc_builder/bin"

@@ -40,3 +40,5 @@ alias ccat="highlight --out-format=ansi" # Color cat - print file with syntax hi
 alias la='ls -a'
 alias i3config='vim ~/.config/i3/config'
 alias c='cd'
+
+export QSYS_ROOTDIR="/home/ochesto/Apps/intelFPGA_lite/18.1/quartus/sopc_builder/bin"
